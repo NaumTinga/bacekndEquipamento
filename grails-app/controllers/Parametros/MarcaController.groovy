@@ -69,7 +69,9 @@ class MarcaController {
 
     @Transactional
     def delete(){
-        String id = params.id
+
+        def requisicao = request?.JSON
+        String id = requisicao.id
 
         if (!id){
             render([status: false, message: 'informe o id'] as JSON)

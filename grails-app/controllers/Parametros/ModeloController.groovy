@@ -9,7 +9,8 @@ class ModeloController {
     @Transactional
     def save() {
 
-        String nome = params.nome
+        def requisicao = request?.JSON
+        String nome = requisicao.nome
 
         if (!nome) {
 
@@ -17,7 +18,7 @@ class ModeloController {
             return
         }
 
-        Modelo modelo = new Marca(nome: nome, dataRegisto: new Date())
+        Modelo modelo = new Modelo(nome: nome, dataRegisto: new Date())
 
         if (modelo.save(flush: true)) {
             render([status: true, message: 'Modelo gravado', id: modelo?.id] as JSON)
@@ -30,8 +31,10 @@ class ModeloController {
 
         @Transactional
         def update(){
-            String nome = params.nome
-            String id = params.id
+
+            def requisicao = request?.JSON
+            String nome = requisicao.nome
+            String id = requisicao.id
 
             if (!nome){
                 render([status: false,message: 'informe o nome'] as JSON)
@@ -61,7 +64,9 @@ class ModeloController {
 
     @Transactional
     def delete(){
-        String id = params.id
+
+        def requisicao = request?.JSON
+        String id = requisicao.id
 
         if(!id){
             render([status: false, message: 'informe o id'] as JSON)
@@ -88,7 +93,7 @@ class ModeloController {
             return
         }
 
-        def modelo = Marca.executeQuery("select new map(m.nome as nome, m.dataRegisto as dataRegisto," +
+        def modelo = Modelo.executeQuery("select new map(m.nome as nome, m.dataRegisto as dataRegisto," +
                 "m.id as id) from Modelo m where m.id = :id", [id: Long.parseLong(id)])
         if (modelo)
             modelo = modelo?.first()
@@ -100,7 +105,7 @@ class ModeloController {
         def modelo = Modelo.executeQuery("select new map(m.nome as nome, m.dataRegisto as dataRegisto," +
                 " m.id as id) from Modelo m")
 
-        render(marca as JSON)
+        render(modelo as JSON)
     }
 
 }

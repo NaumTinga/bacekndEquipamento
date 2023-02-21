@@ -10,7 +10,8 @@ class EquipamentoController {
     @Transactional
     def save() {
 
-        String numeroSerie = params.numeroSerie
+        def requisicao = request?.JSON
+        String numeroSerie = requisicao.numeroSerie
 
         if (!numeroSerie) {
             render([status: false, message: 'informe o numero de serie'] as JSON)
@@ -30,8 +31,10 @@ class EquipamentoController {
 
     @Transactional
     def update() {
-        String numeroSerie = params.numeroSerie
-        String id = params.id
+
+        def requisicao = request?.JSON
+        String numeroSerie = requisicao.numeroSerie
+        String id = requisicao.id
 
         if (!numeroSerie) {
             render([status: false, message: 'informe o numero de serie'] as JSON)
@@ -49,7 +52,7 @@ class EquipamentoController {
             equipamento.numeroSerie = numeroSerie
 
             if (equipamento.save(flush: true)) {
-                render([status: true, message: 'actualizado', id: tipoEquipamento?.id] as JSON)
+                render([status: true, message: 'actualizado', id: equipamento?.id] as JSON)
                 return
             } else {
                 render([status: false, message: 'ocorreu um erro ao actualizar'])
@@ -60,6 +63,30 @@ class EquipamentoController {
             render([status: false, message: 'Equipamento nao encontrado'] as JSON)
             return
         }
+    }
+
+    @Transactional
+    def delete() {
+
+        def requisicao = request?.JSON
+        String id = requisicao.id
+
+        if (!id) {
+            render([status: false, message: 'informe o id'] as JSON)
+            return
+        }
+
+        Equipamento equipamento = Equipamento.findById(Long.parseLong(id))
+
+        if (equipamento) {
+            equipamento.delete()
+            render([status: true, message: 'equipamento removido'] as JSON)
+            return
+        } else {
+            render([status: false, message: 'equipamento nao encontrado'] as JSON)
+            return
+        }
+
     }
 
     def show() {
@@ -82,7 +109,7 @@ class EquipamentoController {
 
     def list(){
         def equipamento = Equipamento.executeQuery("select new map(e.numeroSerie as numeroSerie, e.dataRegisto as dataRegisto," +
-                "e.id as id) from Equipamento t")
+                "e.id as id) from Equipamento e")
 
         render(equipamento as JSON)
     }
