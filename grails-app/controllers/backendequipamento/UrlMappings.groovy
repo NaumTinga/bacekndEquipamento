@@ -19,7 +19,7 @@ class UrlMappings {
             "/delete/$id"(controller:"marca", action: 'delete', id: $id)
         }
 
-        "/api/marca"(resources:"modelo")
+        "/api/aquisicao"(resources:"modelo")
         group "/api/modelo", {
             "/list"(controller:"modelo", action: 'list', method:"GET")
             "/show/$id"(controller:"modelo", action: 'show', id: $id)
@@ -27,6 +27,44 @@ class UrlMappings {
             "/update"(controller:"modelo", action: 'update')
             "/delete/$id"(controller:"modelo", action: 'delete', id: $id)
         }
+
+        "/api/aquisicao"(resources:"aquisicao")
+        group "/api/aquisicao", {
+            "/list"(controller:"aquisicao", action: 'list', method:"GET")
+            "/show/$id"(controller:"aquisicao", action: 'show', id: $id)
+            "/save"(controller:"aquisicao", action: 'save')
+            "/update"(controller:"aquisicao", action: 'update')
+            "/delete/$id"(controller:"aquisicao", action: 'delete', id: $id)
+        }
+
+        "/api/empresa"(resources:"empresa")
+        group "/api/empresa", {
+            "/list"(controller:"empresa", action: 'list', method:"GET")
+            "/show/$id"(controller:"empresa", action: 'show', id: $id)
+            "/save"(controller:"empresa", action: 'save')
+            "/update"(controller:"empresa", action: 'update')
+            "/delete/$id"(controller:"empresa", action: 'delete', id: $id)
+        }
+
+        "/api/equipamento"(resources:"equipamento")
+        group "/api/equipamento", {
+            "/list"(controller:"equipamento", action: 'list', method:"GET")
+            "/show/$id"(controller:"equipamento", action: 'show', id: $id)
+            "/save"(controller:"equipamento", action: 'save')
+            "/update"(controller:"equipamento", action: 'update')
+            "/delete/$id"(controller:"equipamento", action: 'delete', id: $id)
+        }
+
+        "/api/tipoEquipamento"(resources:"tipoEquipamento")
+        group "/api/tipoEquipamento", {
+            "/list"(controller:"tipoEquipamento", action: 'list', method:"GET")
+            "/show/$id"(controller:"tipoEquipamento", action: 'show', id: $id)
+            "/save"(controller:"tipoEquipamento", action: 'save')
+            "/update"(controller:"tipoEquipamento", action: 'update')
+            "/delete/$id"(controller:"tipoEquipamento", action: 'delete', id: $id)
+        }
+
+
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

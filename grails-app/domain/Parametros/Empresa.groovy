@@ -1,4 +1,4 @@
-package backendequipamento
+package Parametros
 
 class Empresa {
 

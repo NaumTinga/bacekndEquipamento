@@ -1,5 +1,6 @@
 package backendequipamento
 
+import Parametros.Empresa
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 

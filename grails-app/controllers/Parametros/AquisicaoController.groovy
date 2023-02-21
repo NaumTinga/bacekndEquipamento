@@ -103,7 +103,7 @@ class AquisicaoController {
                 return
             }
         } else {
-            render([status:false, message: 'modelo nao encontrado' ] as JSON)
+            render([status:false, message: 'aquisicao nao encontrado' ] as JSON)
             return
         }
     }
@@ -125,7 +125,7 @@ class AquisicaoController {
 
             aquisicao.delete()
 
-            render([status: false, message: 'aquisicao removido'] as JSON)
+            render([status: true, message: 'aquisicao removido'] as JSON)
             return
         } else {
             render([status: false, message: 'aquisicao nao encontrado'])

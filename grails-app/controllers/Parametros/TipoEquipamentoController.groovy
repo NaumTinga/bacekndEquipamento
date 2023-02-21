@@ -9,7 +9,8 @@ class TipoEquipamentoController {
     @Transactional
     def save() {
 
-        String nome = params.nome
+        def requisicao = request?.JSON
+        String nome = requisicao.nome
 
         if (!nome) {
             render([status: false, message: 'informe o nome'] as JSON)
@@ -29,8 +30,10 @@ class TipoEquipamentoController {
 
     @Transactional
     def update() {
-        String nome = params.nome
-        String id = params.id
+
+        def requisicao = request?.JSON
+        String nome = requisicao.nome
+        String id = requisicao.id
 
         if (!nome) {
             render([status: false, message: 'informe o nome'] as JSON)
@@ -61,9 +64,23 @@ class TipoEquipamentoController {
         }
     }
 
-    def show() {
+    @Transactional
+    def delete() {
 
-        String id = params.id
+        def requisicao = request?.JSON
+        String id = requisicao?.id
+
+        if (!id) {
+            render([status: false, message: 'informe o id'] as JSON)
+            return
+        }
+
+        TipoEquipamento tipoEquipamento = TipoEquipamento.findById(Long.parseLong(id))
+    }
+
+    def show() {
+        def requisicao = request?.JSON
+        String id = requisicao.id
 
         if (!id) {
             render([status: false, message: 'informe o id'] as JSON)
