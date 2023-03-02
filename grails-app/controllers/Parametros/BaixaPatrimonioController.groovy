@@ -10,20 +10,20 @@ class BaixaPatrimonioController {
     @Transactional
     def save () {
         def requisicao = request?.JSON
-        Date dataBaixaPatrimonio = requisicao.dataBaixaPatrimonio
+        Date dataBaixa = requisicao.dataBaixa
 
-        if (!dataBaixaPatrimonio) {
-            render([status: false, message: 'informe a data de reparacao'] as JSON)
+        if (!dataBaixa) {
+            render([status: false, message: 'informe a data de baixa'] as JSON)
             return
         }
 
-        ItemsBaixaPatrimonio itemsBaixaPatrimonio = new ItemsBaixaPatrimonio(dataBaixaPatrimonio: dataBaixaPatrimonio)
+        BaixaPatrimonio baixaPatrimonio = new BaixaPatrimonio(dataBaixa: dataBaixa)
 
-        if (itemsBaixaPatrimonio.save(flush: true)) {
-            render([status: true, message: 'itemsBaixaPatrimonio gravado', id: itemsBaixaPatrimonio?.id] as JSON)
+        if (baixaPatrimonio.save(flush: true)) {
+            render([status: true, message: 'baixaPatrimonio gravado', id: baixaPatrimonio?.id] as JSON)
             return
         } else {
-            render([status: false, message: 'ocorreu um erro ao registar a itemsBaixaPatrimonio'] as JSON)
+            render([status: false, message: 'ocorreu um erro ao registar a baixaPatrimonio'] as JSON)
             return
         }
     }
@@ -31,11 +31,11 @@ class BaixaPatrimonioController {
     @Transactional
     def update () {
         def requisicao = request?.JSON
-        Date dataBaixaPatrimonio = requisicao.dataBaixaPatrimonio
+        Date dataBaixa = requisicao.dataBaixa
         String id = requisicao.id
 
-        if (!dataBaixaPatrimonio) {
-            render([status: false, message: 'informe a data de reparacao'] as JSON)
+        if (!dataBaixa) {
+            render([status: false, message: 'informe a data de baixa'] as JSON)
             return
         }
 
@@ -44,21 +44,21 @@ class BaixaPatrimonioController {
             return
         }
 
-        ItemsBaixaPatrimonio itemsBaixaPatrimonio = ItemsBaixaPatrimonio.findById(Long.parseLong(id))
+        BaixaPatrimonio baixaPatrimonio = BaixaPatrimonio.findById(Long.parseLong(id))
 
-        if (itemsBaixaPatrimonio){
+        if (baixaPatrimonio){
 
-            itemsBaixaPatrimonio.dataBaixaPatrimonio = dataBaixaPatrimonio
+            baixaPatrimonio.dataBaixa = dataBaixa
 
-            if (itemsBaixaPatrimonio.save(flush: true)){
-                render([status: true, message: 'o modelo foi actualizado', id: itemsBaixaPatrimonio?.id] as JSON)
+            if (baixaPatrimonio.save(flush: true)){
+                render([status: true, message: 'o modelo foi actualizado', id: baixaPatrimonio?.id] as JSON)
                 return
             } else {
                 render([status: false, message: 'ocorreu um erro ao actualizar o seu pedido'] as JSON)
                 return
             }
         } else {
-            render([status:false, message: 'itemsBaixaPatrimonio nao encontrado' ] as JSON)
+            render([status:false, message: 'baixaPatrimonio nao encontrado' ] as JSON)
             return
         }
     }
@@ -74,16 +74,16 @@ class BaixaPatrimonioController {
             return
         }
 
-        ItemsBaixaPatrimonio itemsBaixaPatrimonio = ItemsBaixaPatrimonio.findById(Long.parseLong(id))
+        BaixaPatrimonio baixaPatrimonio = BaixaPatrimonio.findById(Long.parseLong(id))
 
-        if(itemsBaixaPatrimonio){
+        if(baixaPatrimonio){
 
-            itemsBaixaPatrimonio.delete()
+            baixaPatrimonio.delete()
 
-            render([status: true, message: 'itemsBaixaPatrimonio removido'] as JSON)
+            render([status: true, message: 'baixaPatrimonio removido'] as JSON)
             return
         } else {
-            render([status: false, message: 'itemsBaixaPatrimonio nao encontrado'])
+            render([status: false, message: 'baixaPatrimonio nao encontrado'])
         }
     }
 
@@ -97,16 +97,16 @@ class BaixaPatrimonioController {
             return
         }
 
-        def itemsBaixaPatrimonio = ItemsBaixaPatrimonio.executeQuery("select new map(i.dataBaixaPatrimonio as dataBaixaPatrimonio, i.id as id) from itemsBaixaPatrimonio i where i.id = :id", [id: Long.parseLong(id)])
-        if (itemsBaixaPatrimonio)
-            itemsBaixaPatrimonio = itemsBaixaPatrimonio?.first()
+        def baixaPatrimonio = BaixaPatrimonio.executeQuery("select new map(b.dataBaixa as dataBaixa, b.id as id) from baixaPatrimonio b where b.id = :id", [id: Long.parseLong(id)])
+        if (baixaPatrimonio)
+            baixaPatrimonio = baixaPatrimonio?.first()
 
-        render(itemsBaixaPatrimonio as JSON)
+        render(baixaPatrimonio as JSON)
     }
 
     def list(){
-        def itemsBaixaPatrimonio = ItemsBaixaPatrimonio.executeQuery("select new map(i.dataBaixaPatrimonio as dataBaixaPatrimonio, i.id as id) from itemsBaixaPatrimonio i")
+        def baixaPatrimonio = BaixaPatrimonio.executeQuery("select new map(b.dataBaixa as dataBaixa, b.id as id) from baixaPatrimonio b")
 
-        render(itemsBaixaPatrimonio as JSON)
+        render(baixaPatrimonio as JSON)
     }
 }
