@@ -4,7 +4,7 @@ class Equipamento {
 
     String numeroSerie
     Date dataRegisto
-    static  belongsTo = [Aquisicao: Aquisicao]
+    static  belongsTo = [aquisicao: Aquisicao]
 
     static constraints = {
         numeroSerie nullable: false, blank: false

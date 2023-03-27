@@ -8,7 +8,8 @@ class Aquisicao {
     String numeroConcurso
     String pathContracto
 
-    static  belongsTo = [Empresa: Empresa]
+    static  belongsTo = [empresa: Empresa]
+
     static constraints = {
         descricao nullable: false, blank: false
         dataAquisicao nullable: false, blank: false

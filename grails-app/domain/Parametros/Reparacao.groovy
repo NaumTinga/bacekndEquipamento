@@ -15,7 +15,7 @@ class Reparacao {
     String tecnicoRecepcaoDevolucao
     String pathGuiaRecepcaoDevolucao
 
-    static  belongsTo = [Empresa: Empresa]
+    static  belongsTo = [empresa: Empresa]
     static constraints = {
          dataEnvioReparacao nullable: false, blank: false
          avaria nullable: false, blank: false
