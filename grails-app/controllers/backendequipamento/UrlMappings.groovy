@@ -19,6 +19,15 @@ class UrlMappings {
             "/delete/$id"(controller:"marca", action: 'delete', id: $id)
         }
 
+        "/api/modelo"(resources:"modelo")
+        group "/api/modelo", {
+            "/list"(controller:"modelo", action: 'list', method:"GET")
+            "/show/$id"(controller:"modelo", action: 'show', id: $id)
+            "/save"(controller:"modelo", action: 'save')
+            "/update"(controller:"modelo", action: 'update')
+            "/delete/$id"(controller:"modelo", action: 'delete', id: $id)
+        }
+
 
 
         "/api/aquisicao"(resources:"aquisicao")

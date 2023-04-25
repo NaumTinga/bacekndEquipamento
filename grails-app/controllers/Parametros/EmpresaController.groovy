@@ -126,8 +126,14 @@ class EmpresaController {
    }
 
    def list() {
-        def empresa = Empresa.executeQuery("select new map(e.designacao as designacao, e.descricao as descricao" +
-                "e.id as id) from Empresa e")
+
+       // somehow it doesnt work
+//        def empresa = Empresa.executeQuery("select new map(e.designacao as designacao, e.descricao as descricao" +
+//                "e.id as id) from Empresa e")
+
+       def empresa = Empresa.executeQuery("select new map(e.designacao as designacao, e.descricao " +
+               "as descricao, e.id as id) from Empresa e ")
+
        render(empresa as JSON)
    }
 }

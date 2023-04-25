@@ -102,8 +102,12 @@ class ModeloController {
     }
 
     def list(){
-        def modelo = Modelo.executeQuery("select new map(m.nome as nome, m.dataRegisto as dataRegisto," +
-                " m.id as id) from Modelo m")
+
+//        def modelo = Modelo.executeQuery("select new map(m.nome as nome, m.dataRegisto " +
+//                "as dataRegisto, m.id as id) from Modelo m ")
+
+        def modelo = Modelo.executeQuery("select new map(m.nome as nome, m.dataRegisto " +
+                "as dataRegisto, m.id as id) from Modelo m ")
 
         render(modelo as JSON)
     }
