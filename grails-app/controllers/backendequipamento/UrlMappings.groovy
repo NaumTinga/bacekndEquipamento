@@ -57,6 +57,8 @@ class UrlMappings {
             "/delete/$id"(controller:"equipamento", action: 'delete', id: $id)
         }
 
+
+
         "/api/tipoEquipamento"(resources:"tipoEquipamento")
         group "/api/tipoEquipamento", {
             "/list"(controller:"tipoEquipamento", action: 'list', method:"GET")
